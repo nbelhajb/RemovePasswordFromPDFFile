@@ -7,10 +7,16 @@ import os.path
 
 import pikepdf
 import os
+from colorama import init, Fore, Style
 import sys
 
+def warnMsg(_msg):
+    print(Fore.LIGHTYELLOW_EX + _msg + Style.RESET_ALL)
+
 def showCorrectSyntax():
-    print('SYNTAX ERROR - correct syntax is : main.py -f pdf_file_name -p password')
+    warnMsg('SYNTAX ERROR - correct syntax is : main.py -f pdf_file_name -p password')
+
+init ()
 
 pdf_file_name=""
 _password=""
@@ -33,19 +39,19 @@ _password=""
 #    showCorrectSyntax()
 #    exit(1)
 
-pdf_file_name = input("PDF file : ")
-_password = input("PDF password: ")
+pdf_file_name = input(Fore.LIGHTWHITE_EX + "PDF file : ")
+_password = input(Fore.LIGHTWHITE_EX + "PDF password: ")
 
 
 if not os.path.isfile(pdf_file_name):
-    print("file not found ({})".format(pdf_file_name))
+    warnMsg("file not found ({})".format(pdf_file_name))
 #    showCorrectSyntax()
     exit(1)
 
 pdf_file_ext = pdf_file_name.split(".")[-1]
 
 if pdf_file_ext.upper() != "PDF":
-    print("This is not a PDF file !")
+    warnMsg("This is not a PDF file !")
     exit(1)
 
 if _password == "":
